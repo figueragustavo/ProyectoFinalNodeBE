@@ -33,8 +33,13 @@ const registerCtrl = async (req, res) => {
 const loginCtrl = async (req, res) => {
   try{
     req = matchedData(req);
-    const user = await usersModel.findOne({email:req.email})
-
+    const user = await usersModel.findOne({where:{
+      email : req.email
+    }}).then(res => {
+      return res;
+    }).catch((error) =>{
+      console.error("failed to retrivie data: "+ error);
+    });
     if(!user){
       handleHttpError(res, "USER_NOT_EXISTS", 404);
       return
