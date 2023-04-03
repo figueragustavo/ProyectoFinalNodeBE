@@ -2,7 +2,7 @@
   "name": "proyectofinalnodebe",
   "version": "1.0.0",
   "description": "Api para proyecto final PDTC",
-  "main": "app.js",
+  "main": "app2.js",
   "scripts": {
     "dev": "node --watch app2.js",
     "start": "node app2.js"
