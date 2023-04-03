@@ -1,27 +1,37 @@
-const { sequelize } = require("../config/mysql")
-const { DataTypes } = require("sequelize");
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
+const pool = require('./db');
 
-const User = sequelize.define(
-  "users",
-  {
-    name: {
-      type: DataTypes.STRING,
-      allowNull: false,
+const generateToken = (user) => {
+  const token = jwt.sign(
+    {
+      id: user.id,
+      email: user.email,
     },
-    email: {
-      type: DataTypes.STRING,
-    },
-    password: {
-      type: DataTypes.STRING,
-    },
-    role: {
-      type: DataTypes.ENUM(["user", "admin"]),
-    },
-  },
-  {
-    timestamps: true,
+    process.env.JWT_SECRET,
+    {
+      expiresIn: '1h',
+    }
+  );
+  return token;
+};
+
+const comparePassword = async (password, hash) => {
+  return await bcrypt.compare(password, hash);
+};
+
+const authenticateUser = async (email, password) => {
+  const [rows] = await pool.execute('SELECT * FROM users WHERE email = ?', [email]);
+  const user = rows[0];
+  if (!user) {
+    throw new Error('User not found');
   }
-);
-User.find = User.findAll;
-User.findById = User.findByPk;
-module.exports = User;
+  const passwordMatch = await comparePassword(password, user.password);
+  if (!passwordMatch) {
+    throw new Error('Invalid password');
+  }
+  const token = generateToken(user);
+  return { user, token };
+};
+
+module.exports = { authenticateUser };
