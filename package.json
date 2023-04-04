@@ -2,10 +2,10 @@
   "name": "proyectofinalnodebe",
   "version": "1.0.0",
   "description": "Api para proyecto final PDTC",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "dev": "node --watch index.js",
-    "start": "node index.js"
+    "dev": "node --watch app.js",
+    "start": "node app.js"
   },
   "repository": {
     "type": "git",
