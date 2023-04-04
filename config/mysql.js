@@ -9,6 +9,7 @@ const host = process.env.MYSQL_HOST;
 const sequelize = new Sequelize(database, username, password, {
   host,
   dialect: "mysql",
+  dialectModule: require('mysql2')
 });
 
 const dbConnectMySql = async () => {
