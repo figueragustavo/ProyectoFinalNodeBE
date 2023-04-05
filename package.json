@@ -2,10 +2,10 @@
   "name": "proyectofinalnodebe",
   "version": "1.0.0",
   "description": "Api para proyecto final PDTC",
-  "main": "app2.js",
+  "main": "index.js",
   "scripts": {
-    "dev": "node --watch app2.js",
-    "start": "node app2.js"
+    "dev": "node --watch index.js",
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
@@ -18,7 +18,6 @@
   },
   "homepage": "https://github.com/figueragustavo/ProyectoFinalNodeBE#readme",
   "dependencies": {
-    "bcrypt": "^5.1.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.2",
     "cors": "^2.8.5",
@@ -26,9 +25,8 @@
     "express": "^4.18.2",
     "express-validator": "^6.14.0",
     "jsonwebtoken": "^8.5.1",
-    "mariadb": "^3.1.1",
     "multer": "^1.4.5-lts.1",
-    "mysql2": "^2.3.3",
+    "mysql2": "^3.2.0",
     "nodemon": "^2.0.21",
     "route": "^0.2.5",
     "routes": "^2.1.0",
